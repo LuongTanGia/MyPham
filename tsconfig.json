@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@libs/*": ["src/libs/*"],
+      "@pages/*": ["src/pages/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@context/*": ["src/context/*"],
+      "@redux/*": ["src/redux/*"],
+      "@services/*": ["src/services/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@class/*": ["src/class/*"],
+      "@exports/*": ["src/exports/*"],
+      "@forms/*": ["src/forms/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@stores/*": ["src/stores/*"],
+
+      "~types/*": ["src/types/*"],
+      "~stores/*": ["src/stores/*"]
+    }
+  },
+  "include": ["src/**/*", "src/types"],
+  "exclude": ["node_modules", "dist"]
+}

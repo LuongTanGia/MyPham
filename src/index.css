@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+#root {
+  height: 100dvh;
+}
+.ant-table-thead {
+  position: sticky !important;
+  top: 0px !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+}
+.ant-table-summary {
+  position: sticky !important;
+  bottom: 0px !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+}
+.ant-table-tbody .ant-table-cell,
+.ant-table-summary .ant-table-cell {
+  padding: 5px !important;
+}
+.ant-skeleton-image {
+  width: 100% !important;
+  height: 100% !important;
+}
