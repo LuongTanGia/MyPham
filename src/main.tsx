@@ -18,6 +18,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import './index.css'
 import '@ant-design/v5-patch-for-react-19'
+import { router } from './router'
 
 // DayJS setup
 dayjs.extend(updateLocale)
@@ -40,23 +41,6 @@ const queryClient = new QueryClient({
 })
 
 // Router
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RootLayout />,
-    children: [
-      {
-        element: <ProtectedLayout />,
-        children: [{ path: '/', element: <HomePage /> }]
-      },
-      {
-        element: <AuthLayout />,
-        children: [{ path: '/login', element: <LoginPage /> }]
-      },
-      { path: '*', element: <p>NotFoundPage</p> } // 👈 Route 404 fallback
-    ]
-  }
-])
 
 // AntD global config
 message.config({ duration: 3, maxCount: 1 })
