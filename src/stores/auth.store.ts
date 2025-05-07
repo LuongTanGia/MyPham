@@ -10,7 +10,7 @@ const useAuthStore = create<Store>()(
   persist(
     (set) => ({
       token: undefined,
-      refresh_token: undefined,
+
       setToken: (token) => set({ token })
     }),
     {

@@ -1,4 +1,3 @@
-import useAppStore from '@stores/app.store'
 const NumberFormat = ({
   number,
   type,
@@ -8,11 +7,9 @@ const NumberFormat = ({
   type: 'SOLESOLUONG' | 'SOLEDONGIA' | 'SOLESOTIEN' | 'SOLETYLE'
   className?: string
 }) => {
-  const { SoLeHeThong } = useAppStore()
-
   const formattedNumber = new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: SoLeHeThong[type] ?? 0,
-    maximumFractionDigits: SoLeHeThong[type] ?? 0
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
   }).format(number ?? 0)
 
   return (
