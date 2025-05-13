@@ -5,8 +5,10 @@ import NumberFormat from '@components/formats/Number.format'
 import { useState } from 'react'
 import HangHoaStockForm from '@components/forms/hangHoaStock.form'
 import { useHangHoaMutation } from '@controllers/hanghoa.controller'
+import KhachHangUpdate from '@components/forms/KhachHangUpdate.form'
+import KhacHangChiTietTable from './KhachHangChiTiet.table'
 
-const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; loading: boolean }) => {
+const KhachHangTable = ({ data, loading }: { data: ResTypes.KhacHang_DanhSach; loading: boolean }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [type, setType] = useState<'IN' | 'OUT'>('IN')
   const [id, setId] = useState('')
@@ -24,42 +26,22 @@ const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; load
   const handleCancel = () => {
     setIsModalOpen(false)
   }
-  const columns: TableColumnsType<ResTypes.Hanghoa_DataResult> = [
-    { title: <p>Tên hàng</p>, dataIndex: 'name', key: 'name' },
+  const columns: TableColumnsType<ResTypes.KhacHang_DataResult> = [
+    { title: <p>Tên khách hàng</p>, dataIndex: 'name', key: 'name' },
     // { title: 'Nhóm hàng', dataIndex: 'category', key: 'category' },
     {
-      title: <p>Đã bán</p>,
-      dataIndex: 'sold',
-      key: 'sold',
-      render: (text: number) => (
-        <div className='text-right'>
-          <NumberFormat number={text} type='SOLESOTIEN' />
-        </div>
-      )
+      title: <p>Email</p>,
+      dataIndex: 'email',
+      key: 'email'
     },
     {
-      title: <p>Tồn kho</p>,
-      dataIndex: 'stock',
-      key: 'stock',
-      render: (text: number) => (
-        <div className='text-right'>
-          <NumberFormat number={text} type='SOLESOTIEN' />
-        </div>
-      )
+      title: <p>Số điện thoại</p>,
+      dataIndex: 'phone',
+      key: 'phone'
     },
     {
-      title: <p>Giá vốn</p>,
-      dataIndex: 'cost',
-      key: 'cost',
-      render: (text: number) => (
-        <div className='text-right'>
-          <NumberFormat number={text} type='SOLESOTIEN' />
-        </div>
-      )
-    },
-    {
-      title: <p>Giá bán</p>,
-      dataIndex: 'price',
+      title: <p>Công nợ</p>,
+      dataIndex: 'debt',
       key: 'price',
       render: (text: number) => (
         <div className='text-right'>
@@ -72,13 +54,10 @@ const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; load
       dataIndex: 'actions',
       key: 'actions',
       width: 200,
-      render: (_, record: ResTypes.Hanghoa_DataResult) => (
+      render: (_, record: ResTypes.KhacHang_DataResult) => (
         <div className='display flex gap-2 justify-center'>
           <Button type='primary' size='small' onClick={() => showModal('IN', record._id)}>
-            Nhập hàng
-          </Button>
-          <Button type='default' size='small' onClick={() => showModal('OUT', record._id)} danger>
-            Xuất hàng
+            Trả nợ
           </Button>
           <Button type='default' size='small' onClick={() => Products_Delete.mutate(record._id, {})} danger>
             Xóa
@@ -89,14 +68,14 @@ const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; load
   ]
   return (
     <div>
-      <Table<ResTypes.Hanghoa_DataResult>
+      <Table<ResTypes.KhacHang_DataResult>
         columns={columns}
         expandable={{
           expandedRowRender: (record) =>
             record.transactions.length !== 0 && (
               <div>
                 <p className='text-base mb-2 font-bold text-center'>Chi tiết: {record.name}</p>
-                <HangHoaChiTietTable data={record.transactions || []} loading={false} />
+                <KhacHangChiTietTable data={record.transactions || []} loading={false} />
               </div>
             )
         }}
@@ -112,10 +91,12 @@ const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; load
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}>
-        <HangHoaStockForm handleCancel={handleCancel} type={type} id={id} />
+        <KhachHangUpdate handleCancel={handleCancel} type={type} id={id} />
       </Modal>
     </div>
   )
 }
 
-export default HangHoaTable
+export default KhachHangTable
+
+// export defaultKhachHangaTable

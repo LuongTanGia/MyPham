@@ -5,8 +5,9 @@ import NumberFormat from '@components/formats/Number.format'
 import { useState } from 'react'
 import HangHoaStockForm from '@components/forms/hangHoaStock.form'
 import { useHangHoaMutation } from '@controllers/hanghoa.controller'
+import PhieuBanChiTietTable from './PhieuBanChiTiet.table'
 
-const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; loading: boolean }) => {
+const PhieuBanTable = ({ data, loading }: { data: ResTypes.PhieuBan_DanhSach; loading: boolean }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [type, setType] = useState<'IN' | 'OUT'>('IN')
   const [id, setId] = useState('')
@@ -24,55 +25,27 @@ const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; load
   const handleCancel = () => {
     setIsModalOpen(false)
   }
-  const columns: TableColumnsType<ResTypes.Hanghoa_DataResult> = [
-    { title: <p>Tên hàng</p>, dataIndex: 'name', key: 'name' },
-    // { title: 'Nhóm hàng', dataIndex: 'category', key: 'category' },
+  const columns: TableColumnsType<ResTypes.PhieuBan_DataResult> = [
+    { title: <p>ID</p>, dataIndex: '_id', key: '_id' },
+    { title: 'Khách hang', dataIndex: 'customerName', key: 'customerName' },
     {
-      title: <p>Đã bán</p>,
-      dataIndex: 'sold',
-      key: 'sold',
+      title: <p>Tổng tiền</p>,
+      dataIndex: 'totalAmount',
+      key: 'totalAmount',
       render: (text: number) => (
         <div className='text-right'>
           <NumberFormat number={text} type='SOLESOTIEN' />
         </div>
       )
     },
-    {
-      title: <p>Tồn kho</p>,
-      dataIndex: 'stock',
-      key: 'stock',
-      render: (text: number) => (
-        <div className='text-right'>
-          <NumberFormat number={text} type='SOLESOTIEN' />
-        </div>
-      )
-    },
-    {
-      title: <p>Giá vốn</p>,
-      dataIndex: 'cost',
-      key: 'cost',
-      render: (text: number) => (
-        <div className='text-right'>
-          <NumberFormat number={text} type='SOLESOTIEN' />
-        </div>
-      )
-    },
-    {
-      title: <p>Giá bán</p>,
-      dataIndex: 'price',
-      key: 'price',
-      render: (text: number) => (
-        <div className='text-right'>
-          <NumberFormat number={text} type='SOLESOTIEN' />
-        </div>
-      )
-    },
+    { title: 'Người tạo', dataIndex: 'issuedBy', key: 'issuedBy' },
+
     {
       title: '',
       dataIndex: 'actions',
       key: 'actions',
       width: 200,
-      render: (_, record: ResTypes.Hanghoa_DataResult) => (
+      render: (_, record: ResTypes.PhieuBan_DataResult) => (
         <div className='display flex gap-2 justify-center'>
           <Button type='primary' size='small' onClick={() => showModal('IN', record._id)}>
             Nhập hàng
@@ -89,14 +62,16 @@ const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; load
   ]
   return (
     <div>
-      <Table<ResTypes.Hanghoa_DataResult>
+      <Table<ResTypes.PhieuBan_DataResult>
         columns={columns}
         expandable={{
           expandedRowRender: (record) =>
-            record.transactions.length !== 0 && (
+            record.items.length !== 0 && (
               <div>
-                <p className='text-base mb-2 font-bold text-center'>Chi tiết: {record.name}</p>
-                <HangHoaChiTietTable data={record.transactions || []} loading={false} />
+                <p className='text-base mb-2 font-bold text-center'>
+                  Chi tiết: <NumberFormat number={record.totalAmount} type='SOLESOTIEN' />
+                </p>
+                <PhieuBanChiTietTable data={record.items || []} loading={false} />
               </div>
             )
         }}
@@ -118,4 +93,4 @@ const HangHoaTable = ({ data, loading }: { data: ResTypes.Hanghoa_DanhSach; load
   )
 }
 
-export default HangHoaTable
+export default PhieuBanTable

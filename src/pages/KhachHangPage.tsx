@@ -1,12 +1,13 @@
-import HangHoaForm from '@components/forms/HangHoa.form'
-import HangHoaTable from '@components/tables/HangHoa.table'
-import { useHangHoaMutation } from '@controllers/hanghoa.controller'
+import KhachHangForm from '@components/forms/KhachHang.form'
+import KhachHangTable from '@components/tables/KhachHang.table'
+import { useKhachHangMutation } from '@controllers/khachhang.controller'
 import { Button, Modal } from 'antd'
 import { useState } from 'react'
 
-const HomePage = () => {
-  const { data, isFetching } = useHangHoaMutation.DanhSach()
+const KhachHangPage = () => {
+  const { data, isFetching } = useKhachHangMutation.DanhSach()
 
+  console.log('🚀 ~ data:', data)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const showModal = () => {
@@ -22,19 +23,19 @@ const HomePage = () => {
   }
   return (
     <div className='flex flex-col h-full w-full overflow-hidden'>
-      <h1 className='text-xl font-bold p-4'>Hàng hóa mỹ phẩm</h1>
+      <h1 className='text-xl font-bold p-4'>Khách hàng</h1>
       <div className='w-1/12'>
         <Button onClick={showModal} type='primary'>
           Thêm hàng hóa
         </Button>
       </div>
       <div className='mt-2 overflow-auto'>
-        <HangHoaTable data={data || []} loading={isFetching} />
+        <KhachHangTable data={data || []} loading={isFetching} />
       </div>
       <Modal centered title='Thêm hàng hóa' open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
-        <HangHoaForm handleCancel={handleCancel} />
+        <KhachHangForm handleCancel={handleCancel} />
       </Modal>
     </div>
   )
 }
-export default HomePage
+export default KhachHangPage

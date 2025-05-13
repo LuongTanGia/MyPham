@@ -29,6 +29,7 @@
       "@forms/*": ["src/forms/*"],
       "@controllers/*": ["src/controllers/*"],
       "@stores/*": ["src/stores/*"],
+      "@utils/*": ["src/utils/*"],
 
       "~types/*": ["src/types/*"],
       "~stores/*": ["src/stores/*"]

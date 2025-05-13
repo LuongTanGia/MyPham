@@ -28,6 +28,8 @@ export default defineConfig({
       '@forms': path.resolve(__dirname, 'src/forms'),
       '@controllers': path.resolve(__dirname, 'src/controllers'),
       '@stores': path.resolve(__dirname, 'src/stores'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+
       '~types': path.resolve(__dirname, 'src/types'),
       '~stores': path.resolve(__dirname, 'src/stores')
     }

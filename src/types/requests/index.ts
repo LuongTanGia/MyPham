@@ -1,3 +1,5 @@
 export * from './auth'
 export * from './base'
 export * from './hanghoa'
+export * from './khachhang'
+export * from './phieuban'

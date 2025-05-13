@@ -1,36 +1,42 @@
-import { Api_Auth } from '@services/api.list'
+import { Api_List } from '@services/api.list'
 import apiClient from '@services/axios.config'
 import { useCreateUseMutation } from '@services/mutation'
 import { useCustomQuery } from '@services/query'
 import { ReqTypes, ResTypes } from '~types/index'
 
 const DanhSach = async () => {
-  const response = await apiClient.get<ResTypes.Hanghoa_DanhSach>(Api_Auth.Products, {})
+  const response = await apiClient.get<ResTypes.Hanghoa_DanhSach>(Api_List.Products.Products, {})
+  return response.data
+}
+const DanhSach_Small = async () => {
+  const response = await apiClient.get<ResTypes.Hanghoa_DanhSach>(Api_List.Products.Products_List, {})
   return response.data
 }
 const Products_Detail = async (id: string) => {
-  const response = await apiClient.get<ResTypes.Hanghoa_DataResult>(`${Api_Auth.Products}${id}`, {})
+  const response = await apiClient.get<ResTypes.Hanghoa_DataResult>(`${Api_List.Products.Products}${id}`, {})
   return response.data
 }
 const Products_Delete = async (productId: string) => {
-  const response = await apiClient.post<ResTypes.ErrorData>(Api_Auth.Products_Delete, { productId })
+  const response = await apiClient.post<ResTypes.ErrorData>(Api_List.Products.Products_Delete, { productId })
   return response.data
 }
 const Products_Add = async (data: ReqTypes.Hanghoa_Them) => {
-  const response = await apiClient.post<ResTypes.ErrorData>(Api_Auth.Products, data)
+  const response = await apiClient.post<ResTypes.ErrorData>(Api_List.Products.Products, data)
   return response.data
 }
 const Products_In = async (data: ReqTypes.Hanghoa_Sua) => {
-  const response = await apiClient.post<ResTypes.ErrorData>(Api_Auth.Products_In, data)
+  const response = await apiClient.post<ResTypes.ErrorData>(Api_List.Products.Products_In, data)
   return response.data
 }
 const Products_Out = async (data: ReqTypes.Hanghoa_Sua) => {
-  const response = await apiClient.post<ResTypes.ErrorData>(Api_Auth.Products_Out, data)
+  const response = await apiClient.post<ResTypes.ErrorData>(Api_List.Products.Products_Out, data)
   return response.data
 }
 
 export const useHangHoaMutation = {
   DanhSach: () => useCustomQuery<ResTypes.Hanghoa_DanhSach>(['DanhSach_HangHoa'], DanhSach),
+  DanhSach_Small: () => useCustomQuery<ResTypes.Hanghoa_DanhSach>(['DanhSach_HangHoa_Small'], DanhSach_Small),
+
   Products_Add: () =>
     useCreateUseMutation<ReqTypes.Hanghoa_Them, ResTypes.ErrorData>((data) => Products_Add(data), 'Products_Add', [
       'DanhSach_HangHoa'

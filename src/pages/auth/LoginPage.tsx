@@ -30,7 +30,7 @@ const LoginPage = () => {
         </Form.Item>
 
         <Form.Item<ReqTypes.DangNhap>
-          label={<p className='text-nowrap text-base font-bold text-vts_Orange-100'>Mật khẩu</p>}
+          label={<p className='text-nowrap  text-base font-bold text-vts_Orange-100'>Mật khẩu</p>}
           name='password'
           className='!m-0 !w-full'
           rules={[{ required: true, message: 'Không được để trống mật khẩu !' }]}>
@@ -41,7 +41,7 @@ const LoginPage = () => {
           <Button
             type='primary'
             htmlType='submit'
-            className='w-full !bg-sky-800 font-semibold'
+            className='w-full !bg-sky-800 font-semibold mt-2'
             loading={DangNhap.isPending}>
             Đăng nhập
           </Button>
